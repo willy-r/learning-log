@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Learning Log | {{ topic }}
+{% endblock %}
+
+{% block header %}
+  <h2>
+    {{ topic }} 
+    {% if topic.public and user != topic.owner %}
+      <span class="badge badge-success">Public</span> from <b>{{ topic.owner.username }}</b>
+    {% elif topic.public %}
+      <span class="badge badge-success">Public</span>
+    {% endif %}
+  </h2>
+
+  {% if user == topic.owner %}
+    <a class="btn btn-secondary btn-block" href="{% url 'learning_log:new_entry' topic.id%}" role="button">Add new entry</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %} 
+  {% for entry in entries %}
+    <div class="card mb-3">
+      <h4 class="card-header">
+	{{ entry.date_added|date:'M d, Y H:i' }} 
+        {% if user == topic.owner %}
+	  <a class="btn btn-outline-secondary btn-sm" role="button" href="{% url 'learning_log:edit_entry' entry.id %}">Edit entry</a>
+	{% endif %}
+      </h4>
+      <div class="card-body">
+	<p class="card-text">{{ entry.entry_text|linebreaks }}</p>
+      </div>
+   </div><!-- card -->
+   {% empty %}
+   <h5 class="text-danger">There are no entries for this topic yet.</h5>
+   {% endfor %}
+{% endblock %}
+

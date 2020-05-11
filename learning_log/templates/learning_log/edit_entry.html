@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Learning Log | Edit entry
+{% endblock %}
+
+{% block header %}
+  <h2>Editing entry from: <a href="{% url 'learning_log:topic' topic.id %}">{{ topic }}</a></h2>
+{% endblock %}
+
+{% block content %}
+   <form action="{% url 'learning_log:edit_entry' entry.id %}" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-outline-primary">Save changes</button>
+  </form>
+{% endblock %}
+

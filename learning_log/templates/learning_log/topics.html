@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Learning Log | Topics
+{% endblock %}
+
+{% block header %}
+  <h2>Topics <a class="badge badge-secondary" href="{% url 'learning_log:new_topic' %}">Add new topic</a></h2>
+{% endblock %}
+    
+{% block content %}
+  <div class="list-group">   
+    {% for topic in topics %}
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{% url 'learning_log:topic' topic.id %}">
+	{{ topic }}
+	{% if topic.public %}
+	  <span class="badge badge-success ml-auto mr-2">Public</span>
+	{% endif %}
+	<span class="badge badge-info badge-pill">{{ topic.entry_set.count }}</span>
+      </a>
+    {% empty %}
+      <h5 class="text-danger">No topics have been added yet.</h5>
+    {% endfor %}
+  </div>
+{% endblock %}
+
