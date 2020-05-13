@@ -10,7 +10,7 @@
     
 {% block content %}
   <div class="list-group">   
-    {% for topic in topics %}
+    {% for topic in page_obj %}
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{% url 'learning_log:topic' topic.id %}">
 	{{ topic }}
 	{% if topic.public %}
@@ -22,5 +22,30 @@
       <h5 class="text-danger">No topics have been added yet.</h5>
     {% endfor %}
   </div>
+
+  {% if page_obj.has_other_pages %}
+    <nav class="mt-4" aria-label="Page navigation topics">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+	    <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><b>Newer</b></a>
+	  </li>
+        {% else %}
+          <li class="page-item disabled">
+	    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><b>Newer</b></a>
+	  </li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+	    <a class="page-link" href="?page={{ page_obj.next_page_number }}"><b>Older</b></a>
+	{% else %}
+	  <li class="page-item disabled">
+	    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><b>Older</b></a>
+	  </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
 {% endblock %}
 

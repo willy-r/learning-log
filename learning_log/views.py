@@ -1,7 +1,8 @@
 from django.urls import reverse
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 
 from .models import Entry, Topic
 from .forms import EntryForm, TopicForm
@@ -18,19 +19,27 @@ def index(request):
 
 @login_required
 def topics(request):
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
-    context = {'topics': topics}
+    topics = Topic.objects.filter(owner=request.user).order_by('-date_added')
+    paginator = Paginator(topics, 20)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'page_obj': page_obj}
     return render(request, 'learning_log/topics.html', context)
 
 
 def topic(request, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
     if not topic.public and request.user != topic.owner:
-        raise Http404
+        raise Http404  
     entries = topic.entry_set.order_by('-date_added')
+    paginator = Paginator(entries, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         'topic': topic, 
-        'entries': entries,
+        'page_obj': page_obj,
     }
     return render(request, 'learning_log/topic.html', context)
 
