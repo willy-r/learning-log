@@ -8,8 +8,8 @@ class Topic(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     public = models.BooleanField(default=False)
 
-    def make_public(self):
-        self.public = True
+    class Meta:
+        ordering = ['-date_added']
 
     def __str__(self):
         return self.topic_text
@@ -22,6 +22,7 @@ class Entry(models.Model):
 
     class Meta:
         verbose_name_plural = 'entries'
+        ordering = ['-date_added']
 
     def __str__(self):
         if len(self.entry_text) <= 50:

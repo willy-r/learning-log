@@ -13,7 +13,10 @@ class TopicForm(forms.ModelForm):
             'public': _('Do you want make this topic public?')
         }
         help_texts = {
-            'public': _('Anyone will can see the entries for this topic.')
+            'public': _(
+                'Anyone will can see the entries for this topic.\
+                <br><strong>You can change this later.</strong>'
+            )
         }
 
 

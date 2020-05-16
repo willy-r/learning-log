@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Learning Log | Delete topic
+{% endblock %}
+
+{% block header %}
+  <h2>Are you sure?</h2>
+{% endblock %}
+
+{% block content %}
+  <form action="{% url 'learning_log:delete_topic' topic.id %}" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete the topic "<strong>{{ topic }}</strong>"?</p>
+    <ul class="mb-3">
+      {% if topic.entry_set.count != 0 %}
+        {% with num_entries=topic.entry_set.count %}
+          <li>This will delete <span class="badge badge-info badge-pill">{{ num_entries }}</span> entr{{ num_entries|pluralize:"y,ies" }} from this topic too.</li>
+        {% endwith %}
+      {% endif %}
+    </ul>
+
+    <button type="submit" class="btn btn-danger mr-3">Yes, I'm sure</button>
+    <a class="btn btn-primary" href="{% url 'learning_log:topic' topic.id %}" role="button">No, take me back</a>
+  </form>
+{% endblock %}
+

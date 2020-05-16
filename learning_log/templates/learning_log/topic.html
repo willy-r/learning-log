@@ -15,8 +15,22 @@
   </h2>
 
   {% if user == topic.owner %}
-    <a class="btn btn-secondary btn-block" href="{% url 'learning_log:new_entry' topic.id%}" role="button">Add new entry</a>
+    <!-- Collapse button with data-target="topicActions" -->
+    <button class="btn btn-secondary dropdown-toggle btn-block" type="button" data-toggle="collapse" data-target="#topicActions" aria-expanded="false" aria-controls="topicActions">
+      Topic actions
+    </button>
   {% endif %}
+
+  <!-- Initiate the collapse content from topicActions -->
+  <div class="collapse" id="topicActions">
+    <div class="card mt-2">
+      <div class="list-group list-group-flush">
+	<a class="list-group-item list-group-item-action" href="{% url 'learning_log:new_entry' topic.id %}"><strong>Add new entry</strong></a>
+	<a class="list-group-item list-group-item-action" href="{% url 'learning_log:edit_topic' topic.id %}"><strong>Edit topic</strong></a>
+	<a class="list-group-item list-group-item-action text-danger" href="{% url 'learning_log:delete_topic' topic.id %}"><strong>Delete topic</strong></a>
+      </div>
+    </div>
+  </div><!-- /.collapse -->
 {% endblock %}
 
 {% block content %} 
