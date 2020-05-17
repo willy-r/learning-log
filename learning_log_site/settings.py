@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 import django_heroku
+from django.contrib.messages import constants as messages
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -135,6 +138,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'learning_log:topics'
 LOGOUT_REDIRECT_URL = 'learning_log:index'
+
+# Apply CSS from Bootstrap4 on messages.
+MESSAGE_TAGS = {
+    messages.INFO: 'alert alert-info',
+    messages.SUCCESS: 'alert alert-success',
+}
 
 # Configs for Heroku.
 django_heroku.settings(locals())

@@ -25,7 +25,6 @@ class Entry(models.Model):
         ordering = ['-date_added']
 
     def __str__(self):
-        if len(self.entry_text) <= 50:
+        if len(self.entry_text) <= 30:
             return self.entry_text
-        return f'{self.entry_text[:50]}...'
-
+        return f'{self.entry_text[:30]}...'

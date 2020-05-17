@@ -8,7 +8,7 @@
   <h2>
     {{ topic }} 
     {% if topic.public and user != topic.owner %}
-      <span class="badge badge-success">Public</span> from <b>{{ topic.owner.username }}</b>
+      <span class="badge badge-success">Public</span> from <strong>{{ topic.owner.username }}</strong>
     {% elif topic.public %}
       <span class="badge badge-success">Public</span>
     {% endif %}

@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.http import Http404
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
@@ -100,6 +101,9 @@ def delete_topic(request, topic_id):
     # deleted).
     if request.method == 'POST':
         topic.delete()
+        messages.info(
+            request,
+            f'The topic "{topic}" has successfully deleted.')
         # Redirects to the topic list.
         return redirect(reverse('learning_log:topics'))
 
@@ -162,6 +166,12 @@ def delete_entry(request, entry_id):
     topic = entry.topic
     check_topic_owner(request.user, topic.owner)
 
-    # Deletes the entry and redirects to the topic of the entry deleted.
+    # Deletes the entry and shows a flash message informating that the
+    # entry has successfully deleted.
     entry.delete()
+    messages.info(
+        request,
+        f'The entry "{entry}" has successfully deleted.')
+
+    # Redirects to the topic of the entry deleted.
     return redirect(reverse('learning_log:topic', args=(topic.id,)))

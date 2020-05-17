@@ -28,7 +28,7 @@
 	  <ul class="navbar-nav ml-auto">
 	    {% if user.is_authenticated %}
 	      <span class="navbar-text">
-	        Hello, <b>{{ user.username }}</b>!
+		Hello, <strong>{{ user.username }}</strong>!
 	      </span>
 	      <li class="nav-item">
 	        <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
@@ -47,7 +47,19 @@
     </nav>
 
     <div class="container mb-5">
-      <div class="pb-2 mt-4 mb-2 border-bottom">
+      <!-- Shows the messages (if any), before the block header -->
+      {% if messages %}
+        {% for message in messages %}
+	  <div{% if message.tags %} class="{{ message.tags }} alert-dismissible fade show mt-2"{% endif %} role="alert">
+	    {{ message }}
+	    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	      <span aria-hidden="true">&times;</span>
+	    </button>
+	  </div>
+	{% endfor %}
+      {% endif %}
+
+      <div class="pb-2 mt-3 mb-2 border-bottom">
         {% block header %}{% endblock %}
       </div>
       {% block content %}{% endblock %}
