@@ -27,4 +27,3 @@ class EntryAdmin(admin.ModelAdmin):
 
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Entry, EntryAdmin)
-
