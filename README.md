@@ -1,6 +1,6 @@
 # Learning Log Site
 
-Imagine that you learned something new and wouldn't want to forget it, you probably need a place (organized according to what you were learning more recently, and preferably separate in topics) to annotate this and then back to check what you learned. Well, **Learning Log** is a website that track your learning.
+Imagine that you learned something new and wouldn't want to forgot it, you probably need a place (organized according to what you were learning more recently, and preferably separate in topics) to annotate this and then back to check what you learned. Well, **Learning Log** is a website that track your learning.
 
 > You just need to register an account to make your own *Learning Log*, and list the topics you're learning about. Whenever you learning new about a topic, make an entry summarizing what you've learned.
 
