@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-import django_heroku
+import django_on_heroku
 from django.contrib.messages import constants as messages
 
 
@@ -24,10 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.getenv('DEBUG') == 'True' else False
 
 ALLOWED_HOSTS = []
 
@@ -131,7 +131,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-# Configs for django-crispy-forms.
+# Configurations for django-crispy-forms.
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # My configs.
@@ -145,6 +145,5 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert alert-success',
 }
 
-# Configs for Heroku.
-django_heroku.settings(locals())
-
+# Configure Django App for Heroku.
+django_on_heroku.settings(locals())
