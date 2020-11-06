@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # Third party apps.
     'crispy_forms',
+    'markdown_deux',
 
     # My apps.
     'learning_log',
