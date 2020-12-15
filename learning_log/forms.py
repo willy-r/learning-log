@@ -3,8 +3,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from markdown_deux.templatetags.markdown_deux_tags import markdown_allowed
-
 from .models import Entry, Topic
 
 
@@ -32,7 +30,4 @@ class EntryForm(forms.ModelForm):
         fields = ('entry_text',)
         widgets = {
             'entry_text': forms.Textarea(attrs={'cols': 80, 'rows': 15}),
-        }
-        help_texts = {
-            'entry_text': markdown_allowed(),
         }

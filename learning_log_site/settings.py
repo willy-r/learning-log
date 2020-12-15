@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.getenv('DEBUG') == 'True' else False
+DEBUG = bool(int(os.getenv('DEBUG')))
 
 ALLOWED_HOSTS = []
 
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
     # Third party apps.
     'crispy_forms',
-    'markdown_deux',
 
     # My apps.
     'learning_log',

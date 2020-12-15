@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load markdown_deux_tags %}
-
 {% block title %}
   Learning Log | {{ topic }}
 {% endblock %}
@@ -10,7 +8,7 @@
   <h2>
     {{ topic }} 
     {% if topic.public and user != topic.owner %}
-      <span class="badge badge-success">Public</span> from <strong>{{ topic.owner.username }}</strong>
+      <span class="badge badge-success">Public</span> from user <ins datetime="2020-12-14T21:03:04 -0300">{{ topic.owner.username }}</ins>
     {% elif topic.public %}
       <span class="badge badge-success">Public</span>
     {% endif %}
@@ -45,7 +43,7 @@
 	{% endif %}
       </h4>
       <div class="card-body">
-	<p class="card-text">{{ entry.entry_text|markdown|linebreaks }}</p>
+	<p class="card-text">{{ entry.entry_text|linebreaks }}</p>
       </div>
    </div><!-- card -->
    {% empty %}
@@ -57,21 +55,21 @@
        <ul class="pagination justify-content-center">
          {% if page_obj.has_previous %}
 	   <li class="page-item">
-	     <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><b>Newer</b></a>
+	     <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><strong>Newer</strong></a>
 	   </li>
 	 {% else %}
 	   <li class="page-item disabled">
-	     <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><b>Newer</b></a>
+	     <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><strong>Newer</strong></a>
 	   </li>
 	 {% endif %}
          
 	 {% if page_obj.has_next %}
 	   <li class="page-item">
-	     <a class="page-link" href="?page={{ page_obj.next_page_number }}"><b>Older</b></a>
+	     <a class="page-link" href="?page={{ page_obj.next_page_number }}"><strong>Older</strong></a>
 	   </li>
 	 {% else %}
 	   <li class="page-item disabled">
-	     <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><b>Older</b></a>
+	     <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><strong>Older</strong></a>
 	  </li>
 	 {% endif %}
        </ul>
