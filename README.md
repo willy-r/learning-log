@@ -6,8 +6,12 @@ Imagine that you learned something new and wouldn't want to forgot it, you proba
 
 Simple like that. :smile:
 
-# Technologies
+---
 
-Learning Log is a starter project made with :heart: using the basics of [Django](https://www.djangoproject.com). The site style (see image below) is made using [Bootstrap 4](https://getbootstrap.com), and Bootstrap is mobile-first, so its simple but beautiful (and functional, of course :relaxed:).
+## Technologies
 
-![Learning Log mobile](https://user-images.githubusercontent.com/47596121/96734494-fe717980-1390-11eb-88d6-ecec548646f9.jpg)
+Learning Log is a starter project made with :heart: using the basics of [Django](https://www.djangoproject.com). The site style (see image below) is made using [Bootstrap 4](https://getbootstrap.com).
+
+### Mobile version
+
+<img src="images/learning-log-mobile.jpg" alt="Learning Log mobile version" style="width: 350px">
