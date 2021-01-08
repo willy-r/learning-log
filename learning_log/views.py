@@ -1,4 +1,3 @@
-from django.urls import reverse
 from django.http import Http404
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -68,8 +67,7 @@ def new_topic(request):
             new_topic.owner = request.user
             new_topic.save()
             # Redirects to the new topic.
-            return redirect(reverse('learning_log:topic',
-                                    args=(new_topic.id,)))
+            return redirect('learning_log:topic', topic_id=new_topic.id)
 
     context = {'form': form}
     return render(request, 'learning_log/new_topic.html', context)
@@ -91,7 +89,7 @@ def edit_topic(request, topic_id):
         if form.is_valid():
             form.save()
             # Redirects to the edited topic.
-            return redirect(reverse('learning_log:topic', args=(topic.id,)))
+            return redirect('learning_log:topic', topic_id=topic.id)
 
     context = {
         'topic': topic,
@@ -116,7 +114,7 @@ def delete_topic(request, topic_id):
             request,
             f'The topic "{topic}" has successfully deleted.')
         # Redirects to the topic list.
-        return redirect(reverse('learning_log:topics'))
+        return redirect('learning_log:topics')
 
     context = {'topic': topic}
     return render(request, 'learning_log/delete_topic.html', context)
@@ -143,7 +141,7 @@ def new_entry(request, topic_id):
             new_entry.topic = topic
             new_entry.save()
             # Redirects to the topic of the new entry.
-            return redirect(reverse('learning_log:topic', args=(topic.id,)))
+            return redirect('learning_log:topic', topic_id=topic.id)
 
     context = {
         'topic': topic,
@@ -169,7 +167,7 @@ def edit_entry(request, entry_id):
         if form.is_valid():
             form.save()
             # Redirects to the topic of the edited entry.
-            return redirect(reverse('learning_log:topic', args=(topic.id,)))
+            return redirect('learning_log:topic', topic_id=topic.id)
 
     context = {
         'entry': entry,
@@ -194,4 +192,4 @@ def delete_entry(request, entry_id):
         f'The entry "{entry}" has successfully deleted.')
 
     # Redirects to the topic of the entry deleted.
-    return redirect(reverse('learning_log:topic', args=(topic.id,)))
+    return redirect('learning_log:topic', topic_id=topic.id)
